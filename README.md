@@ -26,26 +26,32 @@
     - 6중 반복문을 2중 반복문으로 병렬화
     - global size : {d1, d2 * n * n * batch_num}
     - local size : {d1, 1}
-  
+    <br/><br/>
+    
   - Pooling Layer
     - Convolution Filter를 거친 결과에서 해당 영역 내에서 가장 큰 값을 도출
     - 5중 반복문을 2중 반복문으로 병렬화
     - global size = {batch_num, d * n * n}
-  
+    <br/><br/>
+    
   - FC Layer
     - Pooling Layer의 값으로 이미지 분류
     - 2중 반복문을 모두 병렬화
     - global size = {input * weight}
     - local size = N
-  
+    <br/><br/>
+    
   - Reduction
     - 각 barrier마다 1개씩 더하는 방법에서 3개씩 더하여 barrier waiting 줄임
-  
+    <br/><br/>
+    
   - image batch
     - 작업 수행 메모리 크기가 적어 동시에 여러 개의 이미지를 처리
-  
+    <br/><br/>
+    
   - buffer 메모리 최적화
     각 함수마다 input 메모리가 output 되는 것을 발견하고 메모리 버퍼를 스왑하여 readbuffer 오버헤드를 줄임
+    <br/><br/>
     
   <br/>
   
